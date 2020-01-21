@@ -6,4 +6,5 @@ insert into users (
     ${username},
     ${email},
     ${password}
-);
+)
+returning username, email;
