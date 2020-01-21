@@ -9,7 +9,8 @@ create table if not exists battle (
     battle_id serial primary key,
     battle_name varchar(30),
     battle_type varchar(30),
-    battle_duration varchar(30)
+    battle_duration varchar(30),
+    accepted boolean
 );
 
 create table if not exists users_battle_join (
