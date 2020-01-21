@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Battle from './Components/Battle';
+import routes from './routes';
 
 const Container = styled.div`
   text-align: center;
@@ -9,7 +9,7 @@ const Container = styled.div`
 function App() {
   return (
     <Container>
-      <Battle />
+      {routes}
     </Container>
   );
 }
