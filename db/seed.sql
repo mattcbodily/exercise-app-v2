@@ -10,13 +10,13 @@ create table if not exists battle (
     battle_name varchar(30),
     battle_type varchar(30),
     battle_duration varchar(30),
-    accepted boolean
 );
 
 create table if not exists users_battle_join (
     join_id serial primary key,
     battle_id int references battle(battle_id),
     user_id int references users(user_id)
+    accepted boolean
 );
 
 create table if not exists workout (

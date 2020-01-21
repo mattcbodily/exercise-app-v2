@@ -8,6 +8,7 @@ module.exports = {
         .catch(err => res.status(500).send(err));
     },
     createBattle: async(req, res) => {
+        //this needs the id of the user being challenged, to add to the users_battle_join table, setting accepted to false initially
         const {id} = req.params,
               {battleName, battleType, battleDuration} = req.body,
               db = req.app.get('db');
