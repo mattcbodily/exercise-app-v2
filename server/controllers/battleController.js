@@ -7,15 +7,20 @@ module.exports = {
         .then(battles => res.status(200).send(battles))
         .catch(err => res.status(500).send(err));
     },
+    searchUsers: (req, res) => {
+        const db = req.app.get('db');
+
+        db.battle.search_users()
+        .then(users => res.status(200).send(users))
+        .catch(err => res.status(500).send(err));
+    },
     createBattle: async(req, res) => {
-        //this needs the id of the user being challenged, to add to the users_battle_join table, setting accepted to false initially
         const {id} = req.params,
-              {battleName, battleType, battleDuration} = req.body,
+              {battleName, battleType, battleDuration, challenger} = req.body,
               db = req.app.get('db');
 
         let battleId = await db.battle.create_battle({battleName, battleType, battleDuration});
-        console.log(battleId)
-        db.battle.user_battle_join({battleId, id})
+        db.battle.user_battle_join({battleId: battleId[0].battle_id, id, challenger})
         .then(data => res.sendStatus(200))
         .catch(err => res.status(500).send(err));
     },

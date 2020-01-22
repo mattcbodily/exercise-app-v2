@@ -1,12 +1,10 @@
 insert into battle (
     battle_name,
     battle_type,
-    battle_duration,
-    accepted
+    battle_duration
 ) values (
     ${battleName},
     ${battleType},
-    ${battleDuration},
-    false
+    ${battleDuration}
 )
 returning battle_id;
