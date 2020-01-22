@@ -41,6 +41,7 @@ const FormButton = styled.button`
 const Dashboard = props => {
     const [member, setMember] = useState({})
     const [battles, setBattles] = useState([]);
+    const [battleInvitations, setBattleInvitations] = useState([]);
     const [challengers, setChallengers] = useState([]);
     const [filteredChallengers, setFilteredChallengers] = useState([]);
     const [selectedChallenger, setSelectedChallenger] = useState(null);
@@ -54,12 +55,17 @@ const Dashboard = props => {
         axios.get('/api/user').then(res => {
             setMember(res.data);
             axios.get(`/api/battles/${res.data.user_id}`).then(battles => {
-                setBattles(battles.data)
+                setBattles(battles.data.filter(element => {
+                    return element.accepted === true
+                }))
+                setBattleInvitations(battles.data.filter(element => {
+                   return element.accepted === false 
+                }))
             })
         }).catch(err => console.log(err));
     }, [])
 
-    console.log(battles)
+    console.log(battleInvitations)
 
     useEffect(() => {
         axios.get('/api/users').then(res => {
@@ -97,8 +103,23 @@ const Dashboard = props => {
         )
     })
 
+    const mappedBattleInvitations = battleInvitations.map((invitation, i) => {
+        return (
+            <div key={i}>
+                <p>You have been challenged!</p>
+                <p>{invitation.battle_name}</p>
+                <FormButton>Accept</FormButton>
+                <FormButton>Decline</FormButton>
+            </div>
+        )
+    })
+
     return (
         <Container>
+            {battleInvitations.length !== 0
+            ? (<>{mappedBattleInvitations}</>)
+            : null
+            }
             <Button onClick={toggleView}>+ Create Battle</Button>
             {createBattleView
             ? (<>
