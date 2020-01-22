@@ -3,7 +3,7 @@ module.exports = {
         const {id} = req.params,
               db = req.app.get('db');
 
-        db.battle.get_user_battles({id})
+        db.battle.get_user_battles({id: +id})
         .then(battles => res.status(200).send(battles))
         .catch(err => res.status(500).send(err));
     },

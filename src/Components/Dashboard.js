@@ -53,8 +53,13 @@ const Dashboard = props => {
     useEffect(() => {
         axios.get('/api/user').then(res => {
             setMember(res.data);
+            axios.get(`/api/battles/${res.data.user_id}`).then(battles => {
+                setBattles(battles.data)
+            })
         }).catch(err => console.log(err));
     }, [])
+
+    console.log(battles)
 
     useEffect(() => {
         axios.get('/api/users').then(res => {
@@ -83,6 +88,12 @@ const Dashboard = props => {
     const mappedUsers = filteredChallengers.map((challenger, i) => {
         return (
             <p key={i} onClick={() => setSelectedChallenger(challenger)}>{challenger.username}</p>
+        )
+    })
+
+    const mappedBattles = battles.map((battle, i) => {
+        return (
+            <p key={i}>{battle.battle_name}</p>
         )
     })
 
@@ -116,7 +127,9 @@ const Dashboard = props => {
                     <FormButton onClick={toggleView}>Cancel</FormButton>
                 </Modal>
                </>)
-            : null
+            : (<>
+                {mappedBattles}
+               </>)
             }
 
         </Container>
