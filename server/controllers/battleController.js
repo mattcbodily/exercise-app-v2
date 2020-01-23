@@ -28,8 +28,6 @@ module.exports = {
         const {id} = req.params,
               {battleId} = req.body,
               db = req.app.get('db');
-              console.log('hit', id)
-              console.log(battleId)
 
         db.battle.accept_battle({battleId, id: +id})
         .then(data => res.sendStatus(200))
