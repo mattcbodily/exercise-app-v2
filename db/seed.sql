@@ -25,4 +25,5 @@ create table if not exists workout (
     workout_name varchar(50),
     workout_type varchar(30),
     workout_distance decimal
+    user_id int references users(user_id)
 );

@@ -4,7 +4,8 @@ const express = require('express'),
       session = require('express-session'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
       authCtrl = require('./controllers/authController'),
-      battleCtrl = require('./controllers/battleController');
+      battleCtrl = require('./controllers/battleController')
+      workoutCtrl = require('./controllers/workoutController');
 
 const app = express();
 
@@ -35,6 +36,10 @@ app.get('/api/users', battleCtrl.searchUsers);
 app.post('/api/battle/:id', battleCtrl.createBattle);
 app.put('/api/invitation/:id', battleCtrl.acceptBattle);
 app.delete('/api/invitation/:id', battleCtrl.declineBattle);
+
+//workout endpoints
+app.get('/api/workouts/:id/:type', workoutCtrl.getWorkoutByType);
+app.post('/api/workout/:id', workoutCtrl.addWorkout);
 
 const port = SERVER_PORT;
 app.listen(port, () => console.log(`Exercising on ${port}`));
