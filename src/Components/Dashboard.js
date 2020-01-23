@@ -66,8 +66,6 @@ const Dashboard = props => {
         }).catch(err => console.log(err));
     }, [])
 
-    console.log(battleInvitations)
-
     useEffect(() => {
         axios.get('/api/users').then(res => {
             setChallengers(res.data);

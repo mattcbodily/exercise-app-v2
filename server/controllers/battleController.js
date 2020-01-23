@@ -7,6 +7,22 @@ module.exports = {
         .then(battles => res.status(200).send(battles))
         .catch(err => res.status(500).send(err));
     },
+    getSingleBattle: (req, res) => {
+        const {id} = req.params,
+              db = req.app.get('db');
+
+        db.battle.get_single_battle({id: +id})
+        .then(battle => res.status(200).send(battle))
+        .catch(err => res.status(500).send(err));
+    },
+    getContestants: (req, res) => {
+        const {id} = req.params,
+              db = req.app.get('db');
+
+        db.battle.get_contestants({id: +id})
+        .then(contestants => res.status(200).send(contestants))
+        .catch(err => res.status(200).send(err));
+    },
     searchUsers: (req, res) => {
         const db = req.app.get('db');
 

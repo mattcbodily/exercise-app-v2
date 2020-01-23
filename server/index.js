@@ -28,6 +28,8 @@ app.post('/api/logout', authCtrl.logout);
 app.get('/api/user', authCtrl.getUser);
 
 //battle endpoints
+app.get('/api/battle/:id', battleCtrl.getSingleBattle);
+app.get('/api/contestants/:id', battleCtrl.getContestants);
 app.get('/api/battles/:id', battleCtrl.getUserBattles);
 app.get('/api/users', battleCtrl.searchUsers);
 app.post('/api/battle/:id', battleCtrl.createBattle);

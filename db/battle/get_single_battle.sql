@@ -1,0 +1,1 @@
+select * from battle where battle_id = ${id};
