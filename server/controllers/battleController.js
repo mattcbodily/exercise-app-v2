@@ -21,7 +21,7 @@ module.exports = {
 
         db.battle.get_contestants({id: +id})
         .then(contestants => res.status(200).send(contestants))
-        .catch(err => res.status(200).send(err));
+        .catch(err => console.log(err));
     },
     searchUsers: (req, res) => {
         const db = req.app.get('db');

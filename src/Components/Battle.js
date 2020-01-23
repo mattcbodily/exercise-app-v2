@@ -25,11 +25,16 @@ const Battle = props => {
     useEffect(() => {
         axios.get(`/api/battle/${props.match.params.id}`)
         .then(res => {
+            console.log(res.data[0].battle_type)
             setBattle(res.data[0]);
             axios.get(`/api/contestants/${props.match.params.id}`)
-            .then(contestants => setContestants(contestants.data))
+            .then(contestants => {
+                setContestants(contestants.data)
+            })
         }).catch(err => console.log(err));
     }, [])
+
+    console.log(contestants)
 
     const toggleModal = () => {
         setWorkoutModal(!workoutModal)
