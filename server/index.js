@@ -31,7 +31,8 @@ app.get('/api/user', authCtrl.getUser);
 app.get('/api/battles/:id', battleCtrl.getUserBattles);
 app.get('/api/users', battleCtrl.searchUsers);
 app.post('/api/battle/:id', battleCtrl.createBattle);
-app.put('/api/battle/:id', battleCtrl.acceptBattle);
+app.put('/api/invitation/:id', battleCtrl.acceptBattle);
+app.delete('/api/invitation/:id', battleCtrl.declineBattle);
 
 const port = SERVER_PORT;
 app.listen(port, () => console.log(`Exercising on ${port}`));

@@ -28,11 +28,19 @@ module.exports = {
         const {id} = req.params,
               {battleId} = req.body,
               db = req.app.get('db');
+              console.log('hit', id)
+              console.log(battleId)
 
-        db.battle.accept_battle({battleId});
-
-        db.battle.user_battle_join({battleId, id})
+        db.battle.accept_battle({battleId, id: +id})
         .then(data => res.sendStatus(200))
-        .catch(err => res.status(500).send(err));
+        .catch(err => console.log(err));
+    },
+    declineBattle: (req, res) => {
+        const {id} = req.params,
+              db = req.app.get('db');
+
+        db.battle.decline_battle({id: +id})
+        .then(data => res.sendStatus(200))
+        .catch(err => res.status(500).send(err))
     }
 }

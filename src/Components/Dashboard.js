@@ -91,6 +91,34 @@ const Dashboard = props => {
         .catch(err => console.log(err));
     }
 
+    const acceptBattle = (battleId) => {
+        axios.put(`/api/invitation/${member.user_id}`, {battleId})
+        .then(res => {
+            axios.get(`/api/battles/${member.user_id}`).then(battles => {
+                setBattles(battles.data.filter(element => {
+                    return element.accepted === true
+                }))
+                setBattleInvitations(battles.data.filter(element => {
+                   return element.accepted === false 
+                }))
+            })
+        }).catch(err => console.log(err))
+    }
+
+    const declineBattle = (battleId) => {
+        axios.delete(`/api/invitation/${battleId}`)
+        .then(res => {
+            axios.get(`/api/battles/${member.user_id}`).then(battles => {
+                setBattles(battles.data.filter(element => {
+                    return element.accepted === true
+                }))
+                setBattleInvitations(battles.data.filter(element => {
+                   return element.accepted === false 
+                }))
+            })
+        }).catch(err => console.log(err))
+    }
+
     const mappedUsers = filteredChallengers.map((challenger, i) => {
         return (
             <p key={i} onClick={() => setSelectedChallenger(challenger)}>{challenger.username}</p>
@@ -108,8 +136,8 @@ const Dashboard = props => {
             <div key={i}>
                 <p>You have been challenged!</p>
                 <p>{invitation.battle_name}</p>
-                <FormButton>Accept</FormButton>
-                <FormButton>Decline</FormButton>
+                <FormButton onClick={() => acceptBattle(invitation.battle_id)}>Accept</FormButton>
+                <FormButton onClick={() => declineBattle(invitation.battle_id)}>Decline</FormButton>
             </div>
         )
     })
