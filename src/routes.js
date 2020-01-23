@@ -8,6 +8,6 @@ export default (
     <Switch>
         <Route exact path='/' component={Landing}/>
         <Route path='/dashboard' component={Dashboard}/>
-        <Route path='/battle' component={Battle}/>
+        <Route path='/battle/:id' component={Battle}/>
     </Switch>
 )

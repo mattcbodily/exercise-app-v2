@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 const Container = styled.div`
@@ -127,7 +128,9 @@ const Dashboard = props => {
 
     const mappedBattles = battles.map((battle, i) => {
         return (
-            <p key={i}>{battle.battle_name}</p>
+            <p key={i}>
+                <Link to={`/battle/${battle.battle_id}`}>{battle.battle_name}</Link>
+            </p>
         )
     })
 

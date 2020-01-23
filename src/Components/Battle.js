@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Doughnut} from 'react-chartjs-2';
 
 const Battle = props => {
+    console.log(props);
     const [contestants, setContestants] = useState([]);
 
     return (
