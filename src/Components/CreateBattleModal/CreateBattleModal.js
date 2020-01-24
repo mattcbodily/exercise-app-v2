@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Container, Input, Select, FormButton} from './CreateBattleModalStyles';
+import {Container, H3, Input, Select, FormButton} from './CreateBattleModalStyles';
 
 const CreateBattleModal = props => {
     const [challengers, setChallengers] = useState([]);
@@ -39,6 +39,7 @@ const CreateBattleModal = props => {
 
     return (
         <Container>
+            <H3>Create Your Battle</H3>
             <Input value={battleName} onChange={(e) => setBattleName(e.target.value)}/>
             <Select value={battleType} onChange={(e) => setBattleType(e.target.value)}>
                 <option value='Cycling'>Cycling</option>
