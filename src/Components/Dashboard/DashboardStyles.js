@@ -12,8 +12,17 @@ export const Container = styled.div`
 `
 
 export const Button = styled.button`
+    height: 50px;
+    width: 95%;
+    font-size: 18px;
+    border-radius: 5px;
+`
+
+export const BattleContainer = styled.div`
     height: 80px;
     width: 95%;
     font-size: 18px;
     border-radius: 5px;
+    background-color: lightgray;
+    margin-top: 8px;
 `

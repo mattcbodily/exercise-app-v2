@@ -4,7 +4,7 @@ import axios from 'axios';
 import Profile from '../Profile/Profile';
 import Challenge from '../Challenge/Challenge';
 import CreateBattleModal from '../CreateBattleModal/CreateBattleModal';
-import {Container, Button} from './DashboardStyles';
+import {Container, Button, BattleContainer} from './DashboardStyles';
 
 const Dashboard = props => {
     const [member, setMember] = useState({})
@@ -32,9 +32,9 @@ const Dashboard = props => {
 
     const mappedBattles = battles.map((battle, i) => {
         return (
-            <p key={i}>
+            <BattleContainer key={i}>
                 <Link to={`/battle/${battle.battle_id}`}>{battle.battle_name}</Link>
-            </p>
+            </BattleContainer>
         )
     })
 

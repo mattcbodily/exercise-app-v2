@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Doughnut} from 'react-chartjs-2';
 import axios from 'axios';
 import WorkoutModal from '../WorkoutModal/WorkoutModal';
-import {Button} from './BattleStyles';
+import {Container, ChartWrapper, Button} from './BattleStyles';
 
 const Battle = props => {
     const [member, setMember] = useState({})
@@ -36,29 +36,32 @@ const Battle = props => {
     }
 
     return (
-        <div>
+        <Container>
+            {/* user images will display up here */}
             {contestants.length
-            ? <Doughnut 
-                height={100}
-                width={100}
-                data={{
-                    datasets: [{
-                        backgroundColor: ['#0091F5', '#F50000'],
-                        borderColor: ['#000000', '#000000'],
-                        data: [+contestants[0].distance, +contestants[1].distance]
-                    }]
-                }}
-                options={{
-                    // responsive: true,
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 60
-                }}/>
+            ? (<ChartWrapper>
+                    <Doughnut 
+                        height={1}
+                        width={1}
+                        data={{
+                            datasets: [{
+                                backgroundColor: ['#0091F5', '#F50000'],
+                                borderColor: ['#000000', '#000000'],
+                                data: [+contestants[0].distance, +contestants[1].distance]
+                            }]
+                        }}
+                        options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            cutoutPercentage: 60
+                    }}/>
+                </ChartWrapper>)
             : null}
             <Button onClick={toggleModal}>Add Workout</Button>
             {workoutModal
             ? <WorkoutModal toggleFn={toggleModal}/>
             : null}
-        </div>
+        </Container>
     )
 };
 

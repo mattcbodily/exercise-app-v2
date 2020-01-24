@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {Container, Input, Select, Button} from './WorkoutModalStyles';
+import {Container, H3, Input, Select, Button} from './WorkoutModalStyles';
 
 const WorkoutModal = props => {
     const [member, setMember] = useState({});
@@ -24,6 +24,7 @@ const WorkoutModal = props => {
 
     return (
         <Container>
+            <H3>Add Your Workout</H3>
             <Input value={workoutName} onChange={(e) => setWorkoutName(e.target.value)}/>
             <Input type='date' value={workoutDate} onChange={(e) => setWorkoutDate(e.target.value)}/>
             <Select value={workoutType} onChange={(e) => setWorkoutType(e.target.value)}>
@@ -33,6 +34,7 @@ const WorkoutModal = props => {
             </Select>
             <Input value={workoutDistance} onChange={(e) => setWorkoutDistance(e.target.value)}/>
             <Button onClick={addWorkout}>Submit</Button>
+            <Button onClick={props.toggleFn}>Cancel</Button>
         </Container>
     )
 }
