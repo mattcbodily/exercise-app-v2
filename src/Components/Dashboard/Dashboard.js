@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import Profile from '../Profile/Profile';
+import Challenge from '../Challenge/Challenge';
 import {Container, Button, Modal, Input, Select, FormButton} from './DashboardStyles';
 
 const Dashboard = props => {
     const [member, setMember] = useState({})
     const [battles, setBattles] = useState([]);
-    const [battleInvitations, setBattleInvitations] = useState([]);
+    // const [battleInvitations, setBattleInvitations] = useState([]);
     const [challengers, setChallengers] = useState([]);
     const [filteredChallengers, setFilteredChallengers] = useState([]);
     const [selectedChallenger, setSelectedChallenger] = useState(null);
@@ -20,14 +21,7 @@ const Dashboard = props => {
     useEffect(() => {
         axios.get('/api/user').then(res => {
             setMember(res.data);
-            axios.get(`/api/battles/${res.data.user_id}`).then(battles => {
-                setBattles(battles.data.filter(element => {
-                    return element.accepted === true
-                }))
-                setBattleInvitations(battles.data.filter(element => {
-                   return element.accepted === false 
-                }))
-            })
+            getBattles(res.data.user_id)
         }).catch(err => console.log(err));
     }, [])
 
@@ -55,32 +49,12 @@ const Dashboard = props => {
         .catch(err => console.log(err));
     }
 
-    const acceptBattle = (battleId) => {
-        axios.put(`/api/invitation/${member.user_id}`, {battleId})
-        .then(res => {
-            axios.get(`/api/battles/${member.user_id}`).then(battles => {
-                setBattles(battles.data.filter(element => {
-                    return element.accepted === true
-                }))
-                setBattleInvitations(battles.data.filter(element => {
-                   return element.accepted === false 
-                }))
-            })
-        }).catch(err => console.log(err))
-    }
-
-    const declineBattle = (battleId) => {
-        axios.delete(`/api/invitation/${battleId}`)
-        .then(res => {
-            axios.get(`/api/battles/${member.user_id}`).then(battles => {
-                setBattles(battles.data.filter(element => {
-                    return element.accepted === true
-                }))
-                setBattleInvitations(battles.data.filter(element => {
-                   return element.accepted === false 
-                }))
-            })
-        }).catch(err => console.log(err))
+    const getBattles = (id) => {
+        axios.get(`/api/battles/${id}`).then(battles => {
+            setBattles(battles.data.filter(element => {
+                return element.accepted === true
+            }))
+        })
     }
 
     const mappedUsers = filteredChallengers.map((challenger, i) => {
@@ -97,24 +71,10 @@ const Dashboard = props => {
         )
     })
 
-    const mappedBattleInvitations = battleInvitations.map((invitation, i) => {
-        return (
-            <div key={i}>
-                <p>You have been challenged!</p>
-                <p>{invitation.battle_name}</p>
-                <FormButton onClick={() => acceptBattle(invitation.battle_id)}>Accept</FormButton>
-                <FormButton onClick={() => declineBattle(invitation.battle_id)}>Decline</FormButton>
-            </div>
-        )
-    })
-
     return (
         <Container>
             <Profile />
-            {battleInvitations.length !== 0
-            ? (<>{mappedBattleInvitations}</>)
-            : null
-            }
+            <Challenge battlesFn={getBattles}/>
             <Button onClick={toggleView}>+ Create Battle</Button>
             {createBattleView
             ? (<>
