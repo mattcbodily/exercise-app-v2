@@ -1,22 +1,33 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import image from '../assets/pokemon-grass.png';
 
 const Container = styled.div`
     height: 100vh;
     width: 100%;
+    background-color: #E0F3E8;
 `
 
 const Input = styled.input`
     height: 35px;
     width: 80%;
     font-size: 16px;
+    background-color: #E0F3E8;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
 `
 
 const Button = styled.button`
     height: 35px;
     width: 80%;
     font-size: 16px;
+    background-color: #289B4A;
+    color: white;
+    border-radius: 5px;
 `
 
 const P = styled.p`
@@ -56,15 +67,16 @@ const Landing = props => {
 
     return (
         <Container>
+            <img height='300' src={image} alt='placeholder'/>
             {registerView
-                ? <Input value={username} onChange={(e) => setUsername(e.target.value)}/>
+                ? <Input value={username} placeholder='Username' onChange={(e) => setUsername(e.target.value)}/>
                 : null
             }
-            <Input value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <Input type='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Input value={email} placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
+            <Input type='password' value={password} placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
             {registerView
                 ? (<>
-                    <Input type='password' value={verPassword} onChange={(e) => setVerPassword(e.target.value)}/>
+                    <Input type='password' value={verPassword} placeholder='Verify password' onChange={(e) => setVerPassword(e.target.value)}/>
                     <Button onClick={handleRegister}>Register</Button>
                     <P>Have an account? <Span onClick={toggleView}>Login here.</Span></P>
                    </>)
