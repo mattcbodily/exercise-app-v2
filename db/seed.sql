@@ -2,7 +2,8 @@ create table if not exists users (
     user_id serial primary key,
     username varchar(30),
     email varchar(150),
-    password varchar(250)
+    password varchar(250),
+    user_image varchar(250)
 );
 
 create table if not exists battle (

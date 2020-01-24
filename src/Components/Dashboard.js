@@ -2,16 +2,24 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import Profile from './Profile';
 
 const Container = styled.div`
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
+    background-color: #E0F3E8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding-top: 145px;
 `
 
 const Button = styled.button`
-    height: 50px;
+    height: 80px;
     width: 95%;
     font-size: 18px;
+    border-radius: 5px;
 `
 
 const Modal = styled.div`
@@ -145,6 +153,7 @@ const Dashboard = props => {
 
     return (
         <Container>
+            <Profile />
             {battleInvitations.length !== 0
             ? (<>{mappedBattleInvitations}</>)
             : null
