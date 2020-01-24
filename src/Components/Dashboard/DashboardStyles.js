@@ -17,28 +17,3 @@ export const Button = styled.button`
     font-size: 18px;
     border-radius: 5px;
 `
-
-export const Modal = styled.div`
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-    top: 0;
-`
-
-export const Input = styled.input`
-    height: 35px;
-    width: 80%;
-    font-size: 16px;
-`
-
-export const Select = styled.select`
-    height: 35px;
-    width: 80%;
-    font-size: 16px;
-`
-
-export const FormButton = styled.button`
-    height: 35px;
-    width: 80%;
-    font-size: 16px;
-`

@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import {FormButton} from './ChallengeStyles';
 
 const Challenge = props => {
     const [user, setUser] = useState({});
@@ -16,10 +18,10 @@ const Challenge = props => {
     }, [])
 
     const acceptBattle = (battleId) => {
-        axios.put(`/api/invitation/${member.user_id}`, {battleId})
+        axios.put(`/api/invitation/${user.user_id}`, {battleId})
         .then(res => {
-            axios.get(`/api/battles/${member.user_id}`).then(battles => {
-                battlesFn()
+            axios.get(`/api/battles/${user.user_id}`).then(battles => {
+                props.battlesFn(user.user_id)
                 setBattleInvitations(battles.data.filter(element => {
                    return element.accepted === false 
                 }))
@@ -30,8 +32,8 @@ const Challenge = props => {
     const declineBattle = (battleId) => {
         axios.delete(`/api/invitation/${battleId}`)
         .then(res => {
-            axios.get(`/api/battles/${member.user_id}`).then(battles => {
-                battlesFn()
+            axios.get(`/api/battles/${user.user_id}`).then(battles => {
+                props.battlesFn(user.user_id)
                 setBattleInvitations(battles.data.filter(element => {
                    return element.accepted === false 
                 }))
