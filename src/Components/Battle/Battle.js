@@ -1,14 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import styled from 'styled-components';
 import {Doughnut} from 'react-chartjs-2';
 import axios from 'axios';
-import WorkoutModal from './WorkoutModal';
-
-const Button = styled.button`
-    height: 50px;
-    width: 95%;
-    font-size: 18px;
-`
+import WorkoutModal from '../WorkoutModal/WorkoutModal';
+import {Button} from './BattleStyles';
 
 const Battle = props => {
     const [member, setMember] = useState({})

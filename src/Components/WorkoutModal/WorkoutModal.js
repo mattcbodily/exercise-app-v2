@@ -1,30 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
-
-const Container = styled.div`
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-`
-
-const Input = styled.input`
-    height: 35px;
-    width: 80%;
-    font-size: 16px;
-`
-
-const Select = styled.select`
-    height: 35px;
-    width: 80%;
-    font-size: 16px;
-`
-
-const Button = styled.button`
-    height: 35px;
-    width: 80%;
-    font-size: 16px;
-`
+import {Container, Input, Select, Button} from './WorkoutModalStyles';
 
 const WorkoutModal = props => {
     const [member, setMember] = useState({});

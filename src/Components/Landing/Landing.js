@@ -1,42 +1,7 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
-import image from '../assets/pokemon-grass.png';
-
-const Container = styled.div`
-    height: 100vh;
-    width: 100%;
-    background-color: #E0F3E8;
-`
-
-const Input = styled.input`
-    height: 35px;
-    width: 80%;
-    font-size: 16px;
-    background-color: #E0F3E8;
-    box-sizing: border-box;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 5px;
-`
-
-const Button = styled.button`
-    height: 35px;
-    width: 80%;
-    font-size: 16px;
-    background-color: #289B4A;
-    color: white;
-    border-radius: 5px;
-`
-
-const P = styled.p`
-    font-size: 16px;
-`
-
-const Span = styled.span`
-    text-decoration: underline;
-`
+import {Container, Input, Button, P, Span} from './LandingStyles';
+import image from '../../assets/pokemon-grass.png';
 
 const Landing = props => {
     const [username, setUsername] = useState('');
