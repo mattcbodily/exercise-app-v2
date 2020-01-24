@@ -15,13 +15,18 @@ module.exports = {
         .then(battle => res.status(200).send(battle))
         .catch(err => res.status(500).send(err));
     },
-    getContestants: (req, res) => {
-        const {id} = req.params,
+    getContestants: async(req, res) => {
+        const {id, type} = req.params,
               db = req.app.get('db');
 
-        db.battle.get_contestants({id: +id})
-        .then(contestants => res.status(200).send(contestants))
-        .catch(err => console.log(err));
+        let contestants = await db.battle.get_contestants({id: +id});
+        let distanceOne = await db.workout.get_workout_by_type({id: contestants[0].user_id, type});
+        let distanceTwo = await db.workout.get_workout_by_type({id: contestants[1].user_id, type});
+
+        contestants[0].distance = distanceOne[0].sum;
+        contestants[1].distance = distanceTwo[0].sum;
+
+        res.status(200).send(contestants);
     },
     searchUsers: (req, res) => {
         const db = req.app.get('db');

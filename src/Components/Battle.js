@@ -25,9 +25,8 @@ const Battle = props => {
     useEffect(() => {
         axios.get(`/api/battle/${props.match.params.id}`)
         .then(res => {
-            console.log(res.data[0].battle_type)
             setBattle(res.data[0]);
-            axios.get(`/api/contestants/${props.match.params.id}`)
+            axios.get(`/api/contestants/${props.match.params.id}/type/${res.data[0].battle_type}`)
             .then(contestants => {
                 setContestants(contestants.data)
             })
