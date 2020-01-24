@@ -23,8 +23,8 @@ module.exports = {
         let distanceOne = await db.workout.get_workout_by_type({id: contestants[0].user_id, type});
         let distanceTwo = await db.workout.get_workout_by_type({id: contestants[1].user_id, type});
 
-        contestants[0].distance = distanceOne[0].sum;
-        contestants[1].distance = distanceTwo[0].sum;
+        contestants[0].distance = distanceOne[0].sum !== null ? distanceOne[0].sum : 0;
+        contestants[1].distance = distanceTwo[0].sum !== null ? distanceTwo[0].sum : 0;
 
         res.status(200).send(contestants);
     },
