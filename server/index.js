@@ -5,7 +5,8 @@ const express = require('express'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
       authCtrl = require('./controllers/authController'),
       battleCtrl = require('./controllers/battleController')
-      workoutCtrl = require('./controllers/workoutController');
+      workoutCtrl = require('./controllers/workoutController'),
+      awsCtrl = require('./controllers/awsController');
 
 const app = express();
 
@@ -40,6 +41,9 @@ app.delete('/api/invitation/:id', battleCtrl.declineBattle);
 //workout endpoints
 app.get('/api/workouts/:id/:type', workoutCtrl.getWorkoutByType);
 app.post('/api/workout/:id', workoutCtrl.addWorkout);
+
+//amazon-s3 endpoint
+app.get('/api/signs3', awsCtrl.s3);
 
 const port = SERVER_PORT;
 app.listen(port, () => console.log(`Exercising on ${port}`));
